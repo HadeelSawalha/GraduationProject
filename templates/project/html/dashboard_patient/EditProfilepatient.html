@@ -1,0 +1,229 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>EditProfile</title>
+    <link rel="shortcut icon" type="image/x-icon" href=" {{ url_for('static',filename='img/Logos/logotitle.svg') }}">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Bootstrap core CSS     -->
+
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/dashboard_bootstrap.min.css') }}">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/db_external_light-bootstrap-dashboard.css') }}">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/dashboard_light-bootstrap-dashboard.css') }}">
+<!--eye-->
+     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <!--  Light Bootstrap Table core CSS    -->
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/dashboard_light-bootstrap-dashboard.css') }}">
+
+
+    <!--     Fonts and icons     -->
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/pe-icon-7-stroke.css') }}">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/db_accountdroplist.css') }}">
+
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+    <div class="wrapper">
+            <div class="sidebar" data-color='blue'  data-image="/static/img/sidebar-4.jpg">
+
+                <div class="sidebar-wrapper">
+                    <div class="logo">
+                        <a class="simple-text">
+                            Patient
+                        </a>
+                    </div>
+
+                    <ul class="nav">
+                        <li>
+                            <a href="{{ url_for('dashboardPatient') }}">
+                                <i class="pe-7s-home"></i>
+                                <p>Home</p>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="{{ url_for('EditProfilepatient') }}">
+                                <i class="pe-7s-user"></i>
+                                <p>Edit Profile</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url_for('Resultpatient') }}">
+                                <i class="pe-7s-monitor"></i>
+                                <p>Result</p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-panel">
+                <nav class="navbar navbar-default navbar-fixed">
+                    <div class="container-fluid">
+
+                        <div class="collapse navbar-collapse">
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="{{ url_for('dashboardPatient') }}">
+                                        <p><strong>Home</strong></p>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" class="dropbtn">
+
+                                        <p><strong>Account</strong></p>
+                                    </a>
+                                    <div class="dropdown-content">
+                                        <a href="#">
+
+                                            <h5 style="color: orange;"><i class="pe-7s-user"
+                                                                 style="font-size: 20px;"></i><strong>{{usernamee}}</strong></h5>
+                                        <p style="color: black;line-height: 30px;font-size: 13px;"> Phone:{{phonee}}<br>
+                                            Email:{{emaile}}<br>
+
+                                        </p>
+                                        </a>
+
+                                    </div>
+                                </li>
+
+                                  <li>
+                                <a href="{{ url_for('logout') }}">
+                                    <p><strong>log out</strong></p>
+                                </a>
+                            </li>
+                                <li class="separator hidden-lg"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+
+
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title">Edit Profile</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <form method="post" action="/project/html/dashboard_patient/EditProfilepatient">
+                                        <div class="row">
+                                            <div class="col-md-12 pr-1">
+                                                <div class="form-group">
+                                                    <label>User Name</label>
+                                                    <input type="text" class="form-control" value="{{usernameEdit}}" name="username" placeholder="First Name"
+                                                        required>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 pr-1">
+                                                <div class="form-group" style="display: grid;">
+                                                    <label>Password</label>
+                                                    <input  id="password" type="password" class="form-control"  value="{{passwordEdit}}" name="password"placeholder="password"
+                                                        required maxlength="8">
+                                                    <i  style="margin-left:94%;margin-top:-25px; " class="far fa-eye" id="togglePassword"></i>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 pl-1">
+                                                <div class="form-group">
+                                                    <label>Conform Password</label>
+                                                    <input type="password" name="confirmpass" class="form-control"
+                                                        placeholder="Conform Password" required maxlength="8">
+                                                </div>
+                                            </div>
+                                              {% if error2  == 1 %}
+                                            <div style="color: #D8000C;background-color: #FFD2D2 ; font-weight: bold;padding-left:300px;padding-top:10%;">password not equal </div>
+                                                 {% endif %}
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Email</label>
+                                                    <input type="text" class="form-control" value="{{emailEdit}}" name="email" placeholder="Email"
+                                                        required>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6 pr-1">
+                                                <div class="form-group">
+                                                    <label>City</label>
+                                                    <input type="text" class="form-control" name="city" value="{{cityEdit}}" placeholder="City">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 pl-1">
+                                                <div class="form-group">
+                                                    <label>Phone</label>
+                                                    <input type="text" class="form-control" value="{{phoneEdit}}" name="phone" placeholder="Phone"
+                                                        maxlength="10">
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <button type="submit" class="btn btn-info btn-fill pull-right">Edit
+                                            Profile</button>
+                                        <div class="clearfix"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+    </div>
+
+<script>
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+</body>
+
+
+<!--   Core JS Files   -->
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_jquery.3.2.1.min.js') }}"></script>
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_bootstrap.min.js') }}"></script>
+<!--  Charts Plugin -->
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_chartist.min.js') }}"></script>
+<!-- Control Center for Light Bootstrap Dashboard: scripts for the example pages etc -->
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_light-bootstrap-dashboard.js') }}"></script>
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_demo.js') }}"></script>
+
+
+
+
+</html>

@@ -1,0 +1,338 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Symptoms</title>
+	<link rel="shortcut icon" type="image/x-icon" href=" {{ url_for('static',filename='img/Logos/logotitle.svg') }}">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+    <!-- Bootstrap core CSS     -->
+
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/dashboard_bootstrap.min.css') }}">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/db_external_light-bootstrap-dashboard.css') }}">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/dashboard_light-bootstrap-dashboard.css') }}">
+    <!--     Fonts and icons     -->
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/pe-icon-7-stroke.css') }}">
+    <link rel="stylesheet"
+        href=" https://fonts.googleapis.com/css?family=Montserrat:400,700,200">
+
+    <!--Account-->
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/db_accountdroplist.css') }}">
+
+
+
+    </head>
+
+    <body>
+
+
+        <div class="wrapper">
+                <div class="sidebar" data-color='blue' data-image="/static/img/sidebar-4.jpg">
+
+                    <div class="sidebar-wrapper">
+                        <div class="logo">
+                            <a class="simple-text">
+                                Doctor
+                            </a>
+                        </div>
+
+                        <ul class="nav">
+                            <li >
+                                <a href="{{ url_for('dashboardDoctor22') }}">
+                                    <i class="pe-7s-home"></i>
+                                    <p>Home</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('EditProfile') }}">
+                                    <i class="pe-7s-user"></i>
+                                    <p>Edit Profile</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('AddPatient') }}">
+                                    <i class="pe-7s-note2"></i>
+                                    <p>Add Patient</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('Files') }}">
+                                    <i class="pe-7s-copy-file"></i>
+                                    <p>Patient Files</p>
+                                </a>
+                            </li>
+                            <li class="active">
+                                <a href="{{ url_for('symptomss') }}">
+                                    <i class="pe-7s-note"></i>
+                                    <p>Symptoms Of Patient</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('Examinations') }}">
+                                    <i class="pe-7s-science"></i>
+                                    <p>Medical Examinations</p>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{{ url_for('maintain') }}">
+                                    <i class="pe-7s-config"></i>
+                                    <p>Maintain</p>
+                                </a>
+                            </li>
+
+                            <li>
+                                <a href="{{ url_for('Result') }}">
+                                    <i class="pe-7s-monitor"></i>
+                                    <p>Result</p>
+                                </a>
+                            </li>
+
+
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="main-panel">
+                    <nav class="navbar navbar-default navbar-fixed">
+                        <div class="container-fluid">
+
+                            <div class="collapse navbar-collapse">
+                                <ul class="nav navbar-nav navbar-right">
+
+
+
+                                </ul>
+
+
+                                <ul class="nav navbar-nav navbar-right">
+                                    <li>
+                                        <a href="dashboardDoctor22.html">
+                                            <p><strong>Home</strong></p>
+                                        </a>
+                                    </li>
+                                    <li class="dropdown">
+                                        <a href="javascript:void(0)" class="dropbtn">
+
+                                            <p><strong>Account</strong></p>
+                                        </a>
+
+                                        <div class="dropdown-content">
+                                            <a href="#">
+
+                                                <h5 style="color: orange;"><i class="pe-7s-user"
+                                                                       style="font-size: 20px;"></i><strong>{{username}}</strong></h5>
+                                        <p style="color: black;line-height: 30px;font-size: 13px;"> Phone:{{phone}}<br>
+                                            Email:{{email}}<br>
+                                            Specialization:{{specialization}}<br>
+                                            Office Hour: {{officehour}}
+
+                                        </p>
+                                            </a>
+
+                                        </div>
+                                    </li>
+                               <li>
+                                <a href="{{ url_for('logout') }}">
+                                    <p><strong>log out</strong></p>
+                                </a>
+                            </li>
+                                    <li class="separator hidden-lg"></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </nav>
+
+
+
+
+
+                <div class="content">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title"><strong>Symptoms</strong></h4>
+                                    </div>
+                                    <div class="card-body">
+                                   <form method="post" action="/project/html/dashboard_doctor/symptomss">
+
+                                            <div class="row">
+                                                <div class="col-md-12 pr-1">
+                                                    <div class="form-group">
+                                                        <label>Patient Id</label>
+                                                        <input type="text"  id="idpatient" name="patientid" class="form-control"
+                                                            placeholder="P_Identity Number" required maxlength="9">
+                                                    </div>
+                                                </div>
+
+                                                <div class="card-header">
+                                                    <h4 class="card-title"> Select all Symptoms:</h4>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4 pr-1">
+                                                        <div class="form-group">&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <input type="checkbox"  id="paininchest" name="paininchest"
+                                                                value="pain_in_chest" checked>
+                                                            <label > pain_in_chest</label>
+                                                        </div>
+                                                    </div>pain_in_chest Nausea Cough
+                                                    <div class="col-md-4 px-1">
+                                                        <div class="form-group">
+                                                            <input type="checkbox" name="Nausea" id="Nausea"
+                                                                value="Nausea">
+                                                            <label >Nausea</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 pl-1">
+                                                        <div class="form-group">
+                                                            <input type="checkbox"  name="Cough" id="Cough"
+                                                                value="Cough">
+                                                            <label >Cough</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4 pr-1">
+                                                        <div class="form-group">&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <input type="checkbox"  name="muddle" id="muddle"
+                                                                value="muddle">
+                                                            <label > muddle</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 px-1">
+                                                        <div class="form-group">
+                                                            <input type="checkbox"  name="fever" id="fever"
+                                                                value="fever">
+                                                            <label >fever</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 pl-1">
+                                                        <div class="form-group">
+                                                            <input type="checkbox"  name="Temperature" id="Temperature"
+                                                                value="Temperature (below normal)">
+                                                            <label >Temperature (below normal)</label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-4 pr-1">
+                                                        <div class="form-group">&nbsp;&nbsp;&nbsp;&nbsp;
+                                                            <input type="checkbox"  name="diarrhea" id="diarrhea"
+                                                                value="diarrhea">
+                                                            <label > diarrhea</label>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-md-4 px-1">
+                                                        <div class="form-group">
+                                                            <input type="checkbox"  name="Shivering" id="Shivering"
+                                                                value="Shivering">
+                                                            <label >Shivering</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-4 pl-1">
+                                                        <div class="form-group">
+                                                            <input type="checkbox"  name="shortnessofbreath" id="shortnessofbreath"
+                                                                value="shortness _of_ breath">
+                                                            <label >shortness _of_ breath</label>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+
+
+
+                                            <button type="submit" class="btn btn-info btn-fill pull-right">Save</button>
+                                            <div class="clearfix"></div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>>
+        </div>
+
+
+
+    </body>
+
+    <!--   Core JS Files   -->
+
+    <script type="text/javascript" src=" {{ url_for('static',filename='js/db_jquery.3.2.1.min.js') }}"></script>
+    <script type="text/javascript" src=" {{ url_for('static',filename='js/db_bootstrap.min.js') }}"></script>
+
+    <!--  Charts Plugin -->
+    <script type="text/javascript" src=" {{ url_for('static',filename='js/db_chartist.min.js') }}"></script>
+
+    <!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+    <script type="text/javascript" src=" {{ url_for('static',filename='js/db_light-bootstrap-dashboard.js') }}"></script>
+
+    <!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+    <script type="text/javascript" src=" {{ url_for('static',filename='js/db_demo.js') }}"></script>
+    <script type="text/javascript" src=" {{ url_for('static',filename='js/viewFile.js') }}"></script>
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+<script>
+
+   $("#idpatient").on('keyup', function (event) {
+                   console.log(event.keyCode);
+      if (event.keyCode === 17) {
+      var id = document.getElementById("idpatient").value;
+                          console.log(id);
+          // var id = document.getElementById("idpatient").value;
+  xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // console.log(this.responseText);
+            if (this.responseText.length > 0) {
+
+if (this.responseText==0){
+                document.getElementById("paininchest").disabled = true;
+                document.getElementById("Nausea").disabled = true;
+                document.getElementById("Cough").disabled = true;
+                document.getElementById("muddle").disabled = true;
+                document.getElementById("fever").disabled = true;
+                document.getElementById("Temperature").disabled = true;
+                document.getElementById("diarrhea").disabled = true;
+                document.getElementById("Shivering").disabled = true;
+                document.getElementById("shortnessofbreath").disabled = true;
+                }
+else{
+                document.getElementById("paininchest").disabled = false;
+                document.getElementById("Nausea").disabled = false;
+                document.getElementById("Cough").disabled = false;
+                document.getElementById("muddle").disabled = false;
+                document.getElementById("fever").disabled = false;
+                document.getElementById("Temperature").disabled = false;
+                document.getElementById("diarrhea").disabled = false;
+                document.getElementById("Shivering").disabled = false;
+                document.getElementById("shortnessofbreath").disabled = false;
+}
+}
+        }
+    };
+ xhttp.open("POST", "/disableelement", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("id=" + id);
+
+}
+         console.log("Enter key pressed!!!!!");
+
+   });
+</script>
+
+</html>

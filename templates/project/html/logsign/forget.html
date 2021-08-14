@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+    <title>Pneumonia</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../../img/Logos/logotitle.svg" />
+
+<link rel="stylesheet" href="{{ url_for('static',filename='css/ls_forget.css') }}">
+<style>
+    #msg{
+        visibility: hidden;
+        min-width: 250px;
+        background-color: yellow;
+        color: #000;
+        text-align: center;
+        border-radius: 2px;
+        padding: 16px;
+        position: fixed;
+        z-index: 1;
+        right: 30px;
+        top: 30px;
+        font-size: 17px;
+        margin-right: 30px;
+    }
+    #msg.show{
+        visibility: visible;
+        -webkit-animation:fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    }
+     @-webkit-keyframes fadein{
+         from {top: 0px; opacity: 0;}
+         to{top: 30px; opacity: 1;}
+     }
+     @keyframes fadein{
+         from {top: 0px; opacity: 0;}
+         to{top: 30px; opacity: 1;}
+     }
+     @-webkit-keyframes fadeout{
+         from {top: 30px; opacity: 1;}
+         to{top: 0px; opacity: 0;}
+     }
+     @keyframes fadeout{
+        from {top: 30px; opacity: 1;}
+         to{top: 0px; opacity: 0;}
+     }
+    
+    
+    
+    
+    </style>
+</head>
+<body>
+    <div class="forget">
+     <form method="post" >
+         <h2 style="text-align: center;"><strong>Forget password</strong></h2>
+         <h5 style="text-align: center;color: rgb(10, 10, 10);">Enter email here that you used on your account .we send link on your email to reset your password.</h5>
+         <input type="email" name="username" placeholder="Enter your email"><br><br>
+         <input type="button" value="Send" onclick="myfunction"><br><br>
+         <a href="login.html" style="text-decoration: none;"><strong>Go to the home page</strong></a><br><br>
+         <div id="msg">Link send on your email successfully!!</div>
+         <script>
+            function myfunction(){
+             var x =document.getElementById("msg");
+             x.className="show";
+             setTimeout(function(){x.className=x.className.replace("show","");},3000);
+
+            }
+    
+          </script>
+     </form>
+
+
+
+
+    </div>
+</body>
+</html>

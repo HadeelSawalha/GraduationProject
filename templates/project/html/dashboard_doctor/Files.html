@@ -1,0 +1,473 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <title>Doctor</title>
+    <link rel="shortcut icon" type="image/x-icon" href=" {{ url_for('static',filename='img/Logos/logotitle.svg') }}">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport'/>
+    <meta name="viewport" content="width=device-width"/>
+
+
+    <!-- Bootstrap core CSS     -->
+
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/dashboard_bootstrap.min.css') }}">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/db_external_light-bootstrap-dashboard.css') }}">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/dashboard_light-bootstrap-dashboard.css') }}">
+    <!--     Fonts and icons     -->
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/pe-icon-7-stroke.css') }}">
+    <link rel="stylesheet"
+          href=" https://fonts.googleapis.com/css?family=Montserrat:400,700,200">
+
+    <!--Account-->
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/db_accountdroplist.css') }}">
+
+    <!--table-->
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/table.css') }}">
+
+    <!--view file-->
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/viewFile.css') }}">
+<!--search-->
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.24/css/jquery.dataTables.css">
+
+</head>
+
+<body class="mt32">
+
+
+<div class="wrapper">
+    <div class="sidebar" data-color='blue' data-image="/static/img/sidebar-4.jpg">
+
+        <div class="sidebar-wrapper">
+            <div class="logo">
+                <a class="simple-text">
+                    Doctor
+                </a>
+            </div>
+
+            <ul class="nav">
+                <li>
+                    <a href="{{ url_for('dashboardDoctor22') }}">
+                        <i class="pe-7s-home"></i>
+                        <p>Home</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('EditProfile') }}">
+                        <i class="pe-7s-user"></i>
+                        <p>Edit Profile</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('AddPatient') }}">
+                        <i class="pe-7s-note2"></i>
+                        <p>Add Patient</p>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="{{ url_for('Files') }}">
+                        <i class="pe-7s-copy-file"></i>
+                        <p>Patient Files</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('symptomss') }}">
+                        <i class="pe-7s-note"></i>
+                        <p>Symptoms Of Patient</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('Examinations') }}">
+                        <i class="pe-7s-science"></i>
+                        <p>Medical Examinations</p>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ url_for('maintain') }}">
+                        <i class="pe-7s-config"></i>
+                        <p>Maintain</p>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('Result') }}">
+                        <i class="pe-7s-monitor"></i>
+                        <p>Result</p>
+                    </a>
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+
+    <div class="main-panel">
+        <nav class="navbar navbar-default navbar-fixed">
+            <div class="container-fluid">
+
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+
+
+                    </ul>
+
+
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="dashboardDoctor22.html">
+                                <p><strong>Home</strong></p>
+                            </a>
+                        </li>
+                        <li class="dropdown">
+                            <a href="javascript:void(0)" class="dropbtn">
+
+                                <p><strong>Account</strong></p>
+                            </a>
+
+                            <div class="dropdown-content">
+                                <a href="#">
+
+                                    <h5 style="color: orange;"><i class="pe-7s-user"
+                                                                  style="font-size: 20px;"></i><strong>{{username}}</strong>
+                                    </h5>
+                                    <p style="color: black;line-height: 30px;font-size: 13px;"> Phone:{{phone}}<br>
+                                        Email:{{email}}<br>
+                                        Specialization:{{specialization}}<br>
+                                        Office Hour: {{officehour}}
+
+                                    </p>
+                                </a>
+
+                            </div>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('logout') }}">
+                                <p><strong>log out</strong></p>
+                            </a>
+                        </li>
+                        <li class="separator hidden-lg"></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+        <div class="col-md-12">
+            <div class="card card-plain">
+                <div id="container" class="row">
+                    <div class="col-sm-8">
+                        <h2>Patient <b>Files</b></h2>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="search-box">
+                            <i class="fa fa-search"></i>
+                            <input type="search" onkeyup="myFunction()" id="search" class="form-control search_input " data-table="customers-list" placeholder="Search"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="content table-responsive table-full-width">
+
+                        <table  id="myTable" class="table table-hover table-striped mt32 customers-list">
+                        <thead>
+                        <th style="color: orangered; font-size: medium;"><strong>ID</strong></th>
+                        <th style="color: orangered;font-size: medium;"><strong>Name</strong></th>
+                        <th style="color: orangered;font-size: medium; "><strong>Upload Image</strong></th>
+                        <th style="color: orangered;font-size: medium; "><strong>View File</strong></th>
+                        <th style="color: orangered;font-size: medium;"><strong>Action</strong></th>
+                        </thead>
+                        <tbody>
+
+
+                        {% for i in listpatient %}
+                        <tr>
+                            {%for j in i%}
+                            <td>{{j}}</td>
+                            {%endfor%}
+
+
+                            <td>
+                                <form action="http://localhost:5000/uploader" method="POST"
+                                      enctype="multipart/form-data">
+                                    <input name="patientfile" type="hidden" value="{{i[0]}}">
+                                    <input type="file" name="file"/>
+                                    <input type="submit" style="width:90px;height:40px;" class="btn btn-info btn-fill pull-center"  value="upload" name="upload"/>
+
+                                </form>
+                                <!--     <button type="submit" class="btn btn-info btn-fill pull-center">Upload</button>-->
+                            </td>
+                            <td>
+                                <a onclick="getData(this)" class="Symptoms" id="myFile" title="View"
+                                   data-toggle="tooltip"><i
+                                        class="pe-7s-look"></i></a>
+
+                            </td>
+
+                            <td>
+                                <input name="patienimg" id="id" type="hidden" value="{{i[0]}}">
+                                    <a  onclick="deleteRow(this)"  class="delete" title="Delete"><i
+                                                class="pe-7s-trash"></i></a>
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div id="myModelFile" class="File">
+    <span class="close">&times;</span>
+    <div class="modal-content-File">
+        <div id="text" class="col-md-6">
+            <label class="lable">Information</label><br>
+            <textarea id="information" class="info" style="width: 120%;height: 150px;"
+                      readonly></textarea><br><br>
+            <label class="lable">Symptoms</label><br>
+            <textarea id="symptpms" class="info" readonly
+                      style="height: 90px; width: 120%;"></textarea><br><br>
+            <label class="lable">Medical Examinations</label><br>
+            <textarea id="medical" class="info" readonly
+                      style="width: 120%;height: 150px;"></textarea><br><br>
+            <label class="lable">Result</label><br>
+            <textarea id="result" class="info" readonly
+                      style="height: 50px;width: 120%"></textarea><br><br>
+            <label class="lable">Type</label><br>
+            <textarea id="type" class="info" readonly
+                      style="height: 50px;width: 120%"></textarea><br><br>
+            <label class="lable">Score</label><br>
+            <textarea id="score" class="info" readonly
+                      style="height: 50px;width: 120%"></textarea><br><br>
+            <label class="lable">Treatment</label>
+
+            <textarea id="treatment" class="info" readonly
+                      style="height: 90px;width: 120%"></textarea><br><br>
+        </div>
+        <div class="col-md-6">
+            <img id="img01" src="/static/img/homepatient1.jpg">
+        </div>
+
+
+    </div>
+</div>
+<script>
+        function deleteRow(x) {
+           var id = document.getElementById("myTable").rows[x.parentElement.parentElement.rowIndex].cells[0].innerHTML;
+
+       // var id = document.getElementById("id").value;
+
+     // var i = x.pentNode.pararentNode.rowIndex;
+         //  document.getElementById("data_table").deleteRow(i);
+
+
+  xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // console.log(this.responseText);
+            if (this.responseText.length > 0) {
+                var myObj = JSON.parse(this.responseText);
+                   document.getElementById("myTable").rows[x.parentElement.parentElement.rowIndex].style.display='none';
+
+
+
+
+}
+
+
+        }
+    };
+
+ xhttp.open("POST", "/deleteRowFile", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("id=" + id);
+
+}
+
+
+
+    </script>
+<script>
+function getData(x) {
+    var w = document.getElementById("myTable").rows[x.parentElement.parentElement.rowIndex].cells[0].innerHTML
+    console.log(w);
+    xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // console.log(this.responseText);
+            if (this.responseText.length > 0) {
+                var myObj = JSON.parse(this.responseText);
+
+                myObj = myObj.results;
+                console.log(myObj);
+                console.log(myObj[1][0]);
+                console.log(myObj[2][0]);
+                try {
+                        document.getElementById("information").innerHTML = "Name:"+myObj[0][0][1]+"\n"+"Email:"+ myObj[0][0][3] +"\n"+"Phone:"+ myObj[0][0][4]  +"\n"+"Gender:"+  myObj[0][0][5]  +"\n"+"City:"+
+                            myObj[0][0][6];
+                }
+                catch (err) {
+                    document.getElementById("information").innerHTML = "";
+                }
+
+                try {
+                        document.getElementById("symptpms").innerHTML = myObj[1][0][2];
+                }
+                catch (err) {
+                    document.getElementById("symptpms").innerHTML = "";
+                }
+                try {
+                        document.getElementById("result").innerHTML = myObj[1][0][0];
+                }
+                catch (err) {
+                    document.getElementById("result").innerHTML = "";
+                }
+                try {
+                        document.getElementById("type").innerHTML = myObj[2][0][14];
+                }
+                catch (err) {
+                    document.getElementById("type").innerHTML = "";
+                }
+
+                try {
+                        document.getElementById("score").innerHTML = myObj[2][0][13];
+                }
+                catch (err) {
+                    document.getElementById("score").innerHTML = "";
+                }
+                try {
+                        document.getElementById("treatment").innerHTML =  myObj[1][0][3];
+                }
+                catch (err) {
+                    document.getElementById("treatment").innerHTML = "";
+                }
+                try {
+                        document.getElementById("img01").src = myObj[1][0][1];
+                }
+                catch (err) {
+                    document.getElementById("img01").src = "/static/img/homepatient1.jpg";
+                }
+
+}
+
+            // else
+            // document.getElementById("img01").src= "/static/img/homepatient1.jpg";}
+
+            try {
+
+                document.getElementById("medical").innerHTML ="whitebloodcells:  "+ myObj[2][0][4] +"\n"+"neutrophils:  "+ myObj[2][0][5] +"\n"+"lymphocytes:   "+ myObj[2][0][6] +"\n"+"C_rp:  "+ myObj[2][0][7] + "\n"+"confusion:  "+ myObj[2][0][8] +"\n"+"respiratory:  "+ myObj[2][0][9] +"\n"+"systolic:  "+ myObj[2][0][10] +"\n"+"diastolic:  "+ myObj[2][0][11] +"\n"+ "bun:  "+myObj[2][0][12] +"\n";
+            }
+            catch (err) {
+                document.getElementById("medical").innerHTML = "";
+            }
+            // document.getElementById("myModelFile").style.display = "";
+            // $('#decisionDetailsModal').modal('show');
+
+
+        }
+    };
+    xhttp.open("POST", "/infoforonerow", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("patientid=" + w);
+}
+</script>
+<!--search
+<script>
+(function(document) {
+            'use strict';
+
+            var TableFilter = (function(myArray) {
+                var search_input;
+
+                function _onInputSearch(e) {
+                    search_input = e.target;
+                    var tables = document.getElementsByClassName(search_input.getAttribute('data-table'));
+                    myArray.forEach.call(tables, function(table) {
+                        myArray.forEach.call(table.tBodies, function(tbody) {
+                            myArray.forEach.call(tbody.rows, function(row) {
+                                var text_content = row.textContent.toLowerCase();
+                                var search_val = search_input.value.toLowerCase();
+                                row.style.display = text_content.indexOf(search_val) > -1 ? '' : 'none';
+                            });
+                        });
+                    });
+                }
+
+                return {
+                    init: function() {
+                        var inputs = document.getElementsByClassName('search-input');
+                        myArray.forEach.call(inputs, function(input) {
+                            input.oninput = _onInputSearch;
+                        });
+                    }
+                };
+            })(Array.prototype);
+
+            document.addEventListener('readystatechange', function() {
+                if (document.readyState === 'complete') {
+                    TableFilter.init();
+                }
+            });
+
+        })(document);
+
+
+</script >
+-->
+<!
+
+
+</body>
+
+<!--   Core JS Files   -->
+
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_jquery.3.2.1.min.js') }}"></script>
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_bootstrap.min.js') }}"></script>
+
+<!--  Charts Plugin -->
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_chartist.min.js') }}"></script>
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_light-bootstrap-dashboard.js') }}"></script>
+
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_demo.js') }}"></script>
+<script type="text/javascript" src=" {{ url_for('static',filename='js/viewFile.js') }}"></script>
+<script type="text/javascript" src=" {{ url_for('static',filename='js/addRow.js') }}"></script>
+<!--search-->
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.js"></script>
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("myTable");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+      tda = tr[i].getElementsByTagName("td");
+  for(j=0;j<tda.length;j++){
+      td = tr[i].getElementsByTagName("td")[j];
+      console.log(td)
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        break;
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}}
+</script>
+</html>

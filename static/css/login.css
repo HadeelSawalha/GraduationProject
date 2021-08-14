@@ -1,0 +1,68 @@
+body{
+    
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #fff;
+       font-size: 17px;
+    background: url('../img/signlog.jpg') no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+
+}
+.signin{
+   
+    background: rgba(44, 62, 80, 0.7);
+    
+    padding: 70px;
+    width: 250px;
+    margin-top: 109px;
+    margin: 70px;
+    height: 400px;
+    font-size: medium;
+   
+}
+
+form{
+    width: 240px;
+    text-align: center;
+}
+input{
+    width: 240px;
+    text-align: center;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid #fff;
+    font-family: sans-serif;
+    font-size: 16px;
+    font-weight: 200px;
+    padding: 10px;
+    transition: border 0.5s;
+    outline: none;
+    
+}
+
+h2{
+    color: white;
+}
+a{
+
+    color: #071614;
+    text-decoration: none;
+    margin-left: 10px;
+    font-size: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+a:hover
+{
+    color: rgb(83, 164, 196);
+
+}
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+}
+::placeholder
+{
+    color: aliceblue;
+    opacity: 0.8;
+}

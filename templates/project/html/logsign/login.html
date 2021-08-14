@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<title>Pneumonia</title>
+<link rel="shortcut icon" type="image/x-icon" href="../../img/Logos/logotitle.svg" />
+<link rel="stylesheet" href="{{ url_for('static',filename='css/login.css') }}">
+ <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+
+    <style>
+     button
+{
+    border: none;
+    width: 190px;
+    background: white;
+    font-size: 16px;
+    line-height: 25px;
+    padding: 10px;
+    border-radius: 15px;
+    cursor: pointer;
+}
+button:hover
+{
+    color: #fff;
+    background-color: black;
+}
+
+
+    </style>
+</head>
+
+
+<body>
+   <div class="signin">
+   <!--<form method="post" action="/project/html/logsign/login">-->
+       <form method='POST' action="/project/html/logsign/login" >
+        <h2 style="color: #2dc1ac; font-size: 40px; font-family: Georgia, 'Times New Roman', Times, serif;" >Log In</h2>
+           {% if error == 1 %}
+             <div style="color: #D8000C;background-color: #FFD2D2 ; font-weight: bold;margin-left:17px">User not found</div>
+           {% endif %}
+        <input type="text" name="identitynumber"  placeholder="Identity number"required><!--pattern="\d{1,9}" title="please enter correct identity number"
+        maxlength="9" minlength="9" -->
+           <div style="display: inline-grid;">
+        <input  id="password" type="password" name="password"   placeholder="Password" required>
+                   <i  style="margin-left:90%;margin-top:-25px; " class="far fa-eye" id="togglePassword"></i>
+</div>
+           <!--pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="please enter correct password"-->
+        <br><br>
+
+       <button id="button" name="login" style=" font-weight: bold;margin-top:20px; ">Log in</button><br>
+          <!-- <input type="button" value="login">-->
+        <br>   <!--
+        <div id="container">
+    <a href="{{ url_for('forget') }}" ><strong>Forget password</strong></a>
+
+        </div>--><br><br><br><br>
+        Don't have account?<a href="signUp.html" ><strong>Sign Up</strong></a>
+
+
+
+
+
+
+
+   </form>
+
+
+
+</div>
+<script>
+const togglePassword = document.querySelector('#togglePassword');
+const password = document.querySelector('#password');
+    togglePassword.addEventListener('click', function (e) {
+    // toggle the type attribute
+    const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+    password.setAttribute('type', type);
+    // toggle the eye slash icon
+    this.classList.toggle('fa-eye-slash');
+});
+</script>
+</body>
+   
+</html>

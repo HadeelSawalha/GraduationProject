@@ -1,0 +1,447 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>Doctor</title>
+	<link rel="shortcut icon" type="image/x-icon" href=" {{ url_for('static',filename='img/Logos/logotitle.svg') }}">
+    <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+    <!-- Bootstrap core CSS     -->
+  	<meta charset="UTF-8">	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/dashboard_bootstrap.min.css') }}">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/db_external_light-bootstrap-dashboard.css') }}">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/dashboard_light-bootstrap-dashboard.css') }}">
+    <!--     Fonts and icons     -->
+
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/pe-icon-7-stroke.css') }}">
+    <link rel="stylesheet"
+        href=" https://fonts.googleapis.com/css?family=Montserrat:400,700,200">
+
+    <!--Account-->
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/db_accountdroplist.css') }}">
+    <!--table-->
+    <link rel="stylesheet" href=" {{ url_for('static',filename='css/table.css') }}">
+
+
+
+</head>
+
+<body>
+
+
+    <div class="wrapper">
+            <div class="sidebar" data-color='blue'  data-image="/static/img/sidebar-4.jpg">
+
+                <div class="sidebar-wrapper">
+                    <div class="logo">
+                        <a class="simple-text">
+                            Doctor
+                        </a>
+                    </div>
+
+                    <ul class="nav">
+                        <li >
+                            <a href="{{ url_for('dashboardDoctor22') }}">
+                                <i class="pe-7s-home"></i>
+                                <p>Home</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('EditProfile') }}">
+                                <i class="pe-7s-user"></i>
+                                <p>Edit Profile</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('AddPatient') }}">
+                                <i class="pe-7s-note2"></i>
+                                <p>Add Patient</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('Files') }}">
+                                <i class="pe-7s-copy-file"></i>
+                                <p>Patient Files</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('symptomss') }}">
+                                <i class="pe-7s-note"></i>
+                                <p>Symptoms Of Patient</p>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ url_for('Examinations') }}">
+                                <i class="pe-7s-science"></i>
+                                <p>Medical Examinations</p>
+                            </a>
+                        </li>
+                        <li class="active">
+                            <a href="{{ url_for('maintain') }}">
+                                <i class="pe-7s-config"></i>
+                                <p>Maintain</p>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{ url_for('Result') }}">
+                                <i class="pe-7s-monitor"></i>
+                                <p>Result</p>
+                            </a>
+                        </li>
+
+
+                    </ul>
+                </div>
+            </div>
+
+            <div class="main-panel">
+                <nav class="navbar navbar-default navbar-fixed">
+                    <div class="container-fluid">
+
+                        <div class="collapse navbar-collapse">
+                            <ul class="nav navbar-nav navbar-right">
+
+
+
+                            </ul>
+
+
+                            <ul class="nav navbar-nav navbar-right">
+                                <li>
+                                    <a href="dashboardDoctor22.html">
+                                        <p><strong>Home</strong></p>
+                                    </a>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="javascript:void(0)" class="dropbtn">
+
+                                        <p><strong>Account</strong></p>
+                                    </a>
+
+                                    <div class="dropdown-content">
+                                        <a href="#">
+
+                                            <h5 style="color: orange;"><i class="pe-7s-user"
+                                                                   style="font-size: 20px;"></i><strong>{{username}}</strong></h5>
+                                        <p style="color: black;line-height: 30px;font-size: 13px;"> Phone:{{phone}}<br>
+                                            Email:{{email}}<br>
+                                            Specialization:{{specialization}}<br>
+                                            Office Hour: {{officehour}}
+
+                                        </p>
+                                        </a>
+
+                                    </div>
+                                </li>
+                             <li>
+                                <a href="{{ url_for('logout') }}">
+                                    <p><strong>log out</strong></p>
+                                </a>
+                            </li>
+                                <li class="separator hidden-lg"></li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+
+
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <h2>Patient <b>Details</b></h2>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="search-box">
+                                <i class="fa fa-search"></i>
+                                <input type="search" onkeyup="myFunction()" id="search"  placeholder="Search">
+                            </div>
+                        </div>
+                    </div>
+                    <div  class="content table-responsive table-full-width" >
+                        <table id="data_table"  class="table table-hover table-striped">
+                            <thead>
+                                <th style="color: orangered; font-size: medium;"><strong>ID</strong></th>
+                                <th style="color: orangered;font-size: medium;"><strong>Name</strong></th>
+                                <th style="color: orangered;font-size: medium;margin-right:50%;"><strong>Email</strong></th>
+
+                                <th style="color: orangered;font-size: medium;"><strong>Phone Number</strong></th>
+                                <th style="color: orangered;font-size: medium;"><strong>City</strong>
+                                <th style="color: orangered;font-size: medium;"><strong>Gender</strong></th>
+                                <th style="color: orangered;font-size: medium;"><strong>Date</strong></th>
+                                <th style="color: orangered;font-size: medium;margin-left:20px;"><strong>Actions</strong></th>
+                            </thead>
+                            <tbody>
+
+                        {% for i in listpatient %}
+                     <tr>
+                            {%for j in i%}
+                              <td  >{{j}}</td>
+                            {%endfor%}
+                                <td>   <!--contenteditable="true"-->
+                                       <a onclick="edit_row(this)"  id="edit_button" value="edit"  class="edit" title="Edit" ><i
+                                                class="pe-7s-pen"></i></a>
+                                    <a  title="save" id="save_button" data-toggle="tooltip" onclick="save_row(this)" style="color:green;"><i class="fa fa-save"></i></a>
+
+      <input name="patienimg" id="id" type="hidden" value="{{i[0]}}">
+                                        <a  onclick="deleteRow(this)"  class="delete" title="Delete"><i
+                                                class="pe-7s-trash"></i></a>
+
+                                    </td>
+
+
+                                </tr>
+                        {% endfor %}
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+            </div>
+    </div>
+
+<script>
+        function deleteRow(x) {
+           var id = document.getElementById("data_table").rows[x.parentElement.parentElement.rowIndex].cells[0].innerHTML;
+
+       // var id = document.getElementById("id").value;
+
+     // var i = x.pentNode.pararentNode.rowIndex;
+         //  document.getElementById("data_table").deleteRow(i);
+
+
+  xhttp = new XMLHttpRequest();
+
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // console.log(this.responseText);
+            if (this.responseText.length > 0) {
+                var myObj = JSON.parse(this.responseText);
+                   document.getElementById("data_table").rows[x.parentElement.parentElement.rowIndex].style.display='none';
+
+
+
+
+}
+
+
+        }
+    };
+
+ xhttp.open("POST", "/deleteRow", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("id=" + id);
+
+}
+
+
+
+    </script>
+</body>
+
+<!--edit-->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<!--   Core JS Files
+  <script type="text/javascript" src="//cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js">-->
+
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_jquery.3.2.1.min.js') }}"></script>
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_bootstrap.min.js') }}"></script>
+
+<!--  Charts Plugin -->
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_chartist.min.js') }}"></script>
+
+<!-- Light Bootstrap Table Core javascript and methods for Demo purpose -->
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_light-bootstrap-dashboard.js') }}"></script>
+
+<!-- Light Bootstrap Table DEMO methods, don't include it in your project! -->
+<script type="text/javascript" src=" {{ url_for('static',filename='js/db_demo.js') }}"></script>
+<script type="text/javascript" src=" {{ url_for('static',filename='js/viewFile.js') }}"></script>
+<!--edit-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.3/vue.js"></script>
+
+
+ <script>
+
+function edit_row(no)
+    {
+    // document.getElementById("edit_button"+no).style.display="none";
+   //document.getElementById("save_button"+no).style.display="block";
+    var name = document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[1];
+    var email = document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[2];
+    var phone = document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[3];
+    //var gender = document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[4];
+    var city = document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[4];
+    console.log(name);
+    console.log(email);
+    console.log(phone);
+
+     var name_data=name.innerHTML;
+     var email_data=email.innerHTML;
+     var phone_data=phone.innerHTML;
+     var city_data=city.innerHTML;
+     console.log(name_data);
+    console.log(email_data);
+    console.log(phone_data);
+
+
+    name.innerHTML="<input  style='width:140px;' type='text' id='nametext' value='"+name_data+"'>";
+    email.innerHTML="<input style='width:140px;' type='text' id='emailtext' value='"+email_data+"'>";
+      phone.innerHTML="<input  style='width:140px;' type='text'    minlength='10'  maxlength='10' id='phonedate' value='"+phone_data+"'>";
+    city.innerHTML="<input  style='width:140px;' type='text' id='citytext' value='"+city_data+"'>";
+
+
+console.log(name);console.log(email);console.log(phone);console.log(gender);
+
+    }
+
+
+
+
+      </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.0/sweetalert.min.js">
+</script>
+<script>
+   function save_row(no)
+{
+ var name_val=document.getElementById("nametext").value;
+ var email_val=document.getElementById("emailtext").value;
+ var phone_val=document.getElementById("phonedate").value;
+ //var gender_val=document.getElementById("gendertext").value;
+ var city_val=document.getElementById("citytext").value;
+ var id = document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[0].innerHTML
+
+document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[1].innerHTML=name_val;
+document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[2].innerHTML=email_val;
+document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[3].innerHTML=phone_val;
+document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[4].innerHTML=city_val;
+ console.log('save');
+console.log(name_val);
+console.log(email_val);
+console.log('phone');
+
+console.log(phone_val);
+
+  // If x is Not a Number or less than one or greater than 10
+  if (isNaN(phone_val)||phone_val.length!=10) {
+    text = "Input not valid";
+    // document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[3].style.borderColor="red";
+      console.log('hi')
+       swal({
+    title: "error",
+    text: "Invalid,phone must contain only  10 numbers !",
+     type: "warning",
+}
+
+);
+      return ;
+  }
+  else {
+
+    swal({
+  icon: "success",
+    title: "edit Succeess!",
+    closeOnClickOutside: false,
+
+});
+
+
+
+     text = "Input OK";
+   // document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[3].style.borderColor="green";
+}
+////
+
+var mailformat = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+if(email_val.match(mailformat)){
+     text = "Input OK";
+   // document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[2].style.borderColor="green";
+
+  }
+  else {
+
+
+    text = "Input not valid";
+    // document.getElementById("data_table").rows[no.parentElement.parentElement.rowIndex].cells[2].style.borderColor="red";
+      console.log('hi')
+       swal({
+    title: "error",
+    text: "invalid ,email must contain @!",
+     type: "warning",
+}
+
+);
+      return ;}
+  xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+            // console.log(this.responseText);
+            if (this.responseText.length > 0) {
+                var myObj = JSON.parse(this.responseText);
+                    console.log('fss');
+
+
+
+}
+            // document.getElementById("myModelFile").style.display = "";
+            // $('#decisionDetailsModal').modal('show');
+
+
+        }
+    };
+
+ xhttp.open("POST", "/editRow", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("id=" + id+"&name="+name_val+"&email=" + email_val+"&phone=" + phone_val+"&gender=" + gender_val+"&city=" + city_val);
+
+}
+
+
+</script>
+
+
+<script>
+function myFunction() {
+  var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("search");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("data_table");
+  tr = table.getElementsByTagName("tr");
+  for (i = 0; i < tr.length; i++) {
+      tda = tr[i].getElementsByTagName("td");
+  for(j=0;j<tda.length;j++){
+      td = tr[i].getElementsByTagName("td")[j];
+      console.log(td)
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+        break;
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}}
+</script>
+<script>
+
+    swal({
+  icon: "success",
+    title: "edit Succeess!",
+    closeOnClickOutside: false,
+
+});
+}
+</script>
+</html>
